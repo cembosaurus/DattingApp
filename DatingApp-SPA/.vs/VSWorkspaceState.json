@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\members",
+    "\\src\\app\\members\\photo-editor"
+  ],
+  "SelectedNode": "\\src\\app\\members\\photo-editor\\photo-editor.component.ts",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,29 @@
+.rr {
+    border-style: solid; 
+    border-color: red;
+}
+
+.gg {
+    border-style: solid; 
+    border-color: rgb(2, 226, 2);
+}
+
+.bb {
+    border-style: solid; 
+    border-color: blue;
+}
+
+.yy {
+    border-style: solid; 
+    border-color: rgb(235, 235, 2);
+}
+
+.mm {
+    border-style: solid; 
+    border-color: magenta;
+}
+
+.cc {
+    border-style: solid; 
+    border-color:cyan;
+}

@@ -1,0 +1,56 @@
+<div class="rr container mt-4">
+  <div class="bb row">
+    <h1>{{user.knownAs}}'s profile</h1>
+  </div>
+  <div class="gg row">
+    <div class="bb col-sm-4">
+      <div class="yy card">
+        <img class="card-img-top img-thumbnail" src="{{user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}">
+        <div class="rr card-body">
+          <strong>Location:</strong>
+          <p>{{user.city}}, {{user.country}}</p>
+        </div>
+        <div class="rr card-body">
+          <strong>Age:</strong>
+          <p>{{user.age}}</p>
+        </div>
+        <div class="rr card-body">
+          <strong>Last Active:</strong>
+          <p>{{user.lastActive | timeAgo}}</p>
+        </div>
+        <div class="rr card-body">
+          <strong>Member Since:</strong>
+          <p>{{user.created | date: 'mediumDate'}}</p>
+        </div>
+      </div>
+      <div class="rr card-footer">
+        <div class="gg btn-group d-flex">
+          <button class="btn btn-primary w-100">Like</button>
+          <button class="btn btn-success w-100">Message</button>
+        </div>
+      </div>
+    </div>
+    <div class="yy col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="About {{user.knownAs}}">
+            <h4>Description</h4>
+            <p>{{user.introduction}}</p>
+            <h4>Looking For</h4>
+            <p>{{user.lookingFor}}</p>
+          </tab>
+          <tab heading="Interests">
+            <h4>Interests</h4>
+            <p>{{user.interests}}</p>
+          </tab>
+          <tab heading="Photos">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+          </tab>
+          <tab heading="Messages">
+            <p>messages will go here</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
