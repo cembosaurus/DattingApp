@@ -1,3 +1,4 @@
+import { Message } from './../_models/message';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { User } from './../_models/user';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -7,7 +8,8 @@ import { environment } from 'src/environments/environment';
 import { Photo } from '../_models/photo';
 import { PaginatedResult } from '../_models/Pagination';
 import { map } from 'rxjs/operators';
-import { Message } from '../_models/message';
+
+
 
 const httpOptions = {
   headers: new HttpHeaders ({
@@ -118,6 +120,11 @@ export class UserService {
 
       })
     );
+  }
+
+
+  getMessageThread(id: number, recipientId: number) {
+    return this.http.get<Message[]>(this.baseUrl + id + '/messages/thread/' + recipientId);
   }
 
 }

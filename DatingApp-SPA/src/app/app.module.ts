@@ -1,3 +1,4 @@
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -54,7 +55,8 @@ export function getToken() {
       MemberDetailsComponent,
       MemberEditComponent,
       PhotoEditorComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      MemberMessagesComponent
    ],
    imports: [
       BrowserModule,
