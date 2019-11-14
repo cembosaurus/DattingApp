@@ -11,6 +11,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MemberMessagesComponent implements OnInit {
 
+  today: number = Date.now();
+
   @Input() recipientId: number;
   messages: Message[];
 

@@ -1,3 +1,67 @@
-<div *ngFor="let message of messages">
-{{message.content}}
+<div class="rr card">
+    <!-- <small class="card-header">{{ today | date }}</small> -->
+    <div class="gg card-body">
+        <div *ngIf="messages?.length === 0">
+            <p>No messages yet. Say 'Hi' by using the message box below.</p>
+        </div>
+
+        <ul class="bb chat">
+            <li *ngFor="let message of messages">
+
+                <!-- to them -->
+
+                <div *ngIf="message.senderId == recipientId">
+                    <span class="yy chat-img float-left">
+                        <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="mm rounded-circle">
+                    </span>
+
+                    <div class="cc chat-body">
+                        <div class="rr header">
+                            <strong class="gg primary-font">{{message.senderKnownAs}}</strong>
+                            <small class="bb text-muted float-right">
+                                <span class="yy fa fa-clock-o"> {{message.messageSent | timeAgo}}</span>
+                            </small>
+                        </div>
+                        <p>{{message.content}}</p>
+                    </div>
+
+                </div>
+
+                <!-- to me -->
+
+                <div *ngIf="message.senderId != recipientId">
+                        <span class="mm chat-img float-right">
+                            <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="cc rounded-circle">
+                        </span>
+    
+                        <div class="rr chat-body">
+                            <div class="gg header">
+                                <small class="bb text-muted">
+                                    <span class="yy fa fa-clock-o"> {{message.messageSent | timeAgo}}</span>
+                                    <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
+                                    <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeAgo}})</span>
+                                </small>                                
+                                <strong class="mm primary-font float-right">{{message.senderKnownAs}}</strong>
+                            </div>
+                            <p>{{message.content}}</p>
+                        </div>
+    
+                    </div>
+
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="card-footer">
+        <form action="">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" placeholder="sent a private message">
+                <div class="input-group-append">
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div>
