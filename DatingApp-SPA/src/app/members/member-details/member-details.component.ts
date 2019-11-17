@@ -2,10 +2,11 @@ import { MemberMessagesComponent } from './../member-messages/member-messages.co
 import { AlertifyService } from './../../_services/alertify.service';
 import { UserService } from './../../_services/user.service';
 import { AuthService } from './../../_services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 
 
@@ -16,6 +17,7 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
 })
 export class MemberDetailsComponent implements OnInit {
 
+  @ViewChild('memberTabs') memberTabs: TabsetComponent;
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -39,6 +41,16 @@ export class MemberDetailsComponent implements OnInit {
       }
 
     });
+
+
+    this.route.queryParams.subscribe(data => {
+      const selectedTab = data['tab'];
+      // ............... Neil's solution:
+      // this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
+      // ................ MY solution:
+      this.selectTab(selectedTab > 0 ? selectedTab : 0);
+    });
+
 
     this.galleryOptions = [
       {
@@ -81,5 +93,14 @@ export class MemberDetailsComponent implements OnInit {
 
     return imageUrls;
   }
+
+
+  selectTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
+  }
+
+
+
+
 
 }
