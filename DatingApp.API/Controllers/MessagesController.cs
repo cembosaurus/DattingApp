@@ -30,7 +30,7 @@ namespace DatingApp.API.Controllers
 
 
         //... 'userId' is from Controller ROUTE, 'id' is from this action QUERY STRING.
-        [HttpGet("{id}", Name ="GetMessage")]
+        [HttpGet("{id}", Name = "GetMessage")]
         public async Task<IActionResult> GetMessage(int userId, int id)
         {
 
@@ -42,7 +42,7 @@ namespace DatingApp.API.Controllers
             if (message == null)
                 return NotFound();
 
-            return Ok(message);        
+            return Ok(message);
         }
 
 
@@ -93,7 +93,9 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
         {
 
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            var sender = await _repo.GetUser(userId);
+
+            if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             // ... copying senderId from query to model in body ???
@@ -109,20 +111,41 @@ namespace DatingApp.API.Controllers
 
             _repo.Add(message);
 
-            var messageToReturn = _mapper.Map<MessageForCreationDto>(message);
 
             if (await _repo.SaveAll())
-            { 
-                var result = CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
-
-                return result;
+            {
+                var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
+                return CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
             }
 
             throw new Exception("Creating the message failed on Save !");
-        
+
         }
 
 
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
+        {
+
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var message = await _repo.GetMessage(id);
+
+            if (message.SenderId == userId)
+                message.DeletedBySender = true;
+
+            if (message.RecipientId == userId)
+                message.DeletedByRecipient = true;
+
+            if (message.DeletedBySender && message.DeletedByRecipient )
+                _repo.Delete(message);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("Message was not deleted !");
+        }
 
 
     }
