@@ -7,7 +7,7 @@
 
         <ul class="bb chat">
             <li *ngFor="let message of messages">
-
+{{message.isRead}}
                 <!-- to them -->
 
                 <div *ngIf="message.senderId == recipientId">
@@ -39,7 +39,7 @@
                                 <small class="bb text-muted">
                                     <span class="yy fa fa-clock-o"> {{message.messageSent | timeAgo}}</span>
                                     <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
-                                    <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeAgo}})</span>
+                                    <span *ngIf="message.isRead" class="text-success">(Read {{message.messageRead | timeAgo}})</span>
                                 </small>                                
                                 <strong class="mm primary-font float-right">{{message.senderKnownAs}}</strong>
                             </div>

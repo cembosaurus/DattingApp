@@ -180,7 +180,7 @@ namespace DatingApp.API.Data
                     messages = messages.Where(m => m.SenderId == messageParams.UserId && !m.DeletedBySender);
                     break;
                 default:                                                                 //... OR:    !m.IsRead
-                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && m.IsRead == false && m.DeletedByRecipient);
+                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && m.IsRead == false && !m.DeletedByRecipient);
                     break;
             }
 
