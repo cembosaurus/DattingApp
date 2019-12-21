@@ -142,7 +142,13 @@ namespace DatingApp.API
             // ... my authentication inserted into HTTP request pipeline. Order matters ...
             app.UseAuthentication();
 
-            app.UseMvc();
+            // ... to serve static files from my 'wwwroot'
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseMvc( routes => {
+                routes.MapSpaFallbackRoute( name: "spa-fallback", defaults: new { controller = "Fallback", action = "Index"});
+            });
 
         }
     }
