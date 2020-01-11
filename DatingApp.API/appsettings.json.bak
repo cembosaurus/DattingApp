@@ -1,0 +1,19 @@
+{
+  "Cembo_Settings": {
+    "Token": "cembov secret key"
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost; Database=datingapp; Uid=appuser; Pwd=password"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "CloudinarySettings": {
+    "CloudName": "cembo",
+    "ApiKey": "891764317218786",
+    "ApiSecret": "PuPcBrWuU0jJRdlbnCmsyigQfLM"
+  }
+}
